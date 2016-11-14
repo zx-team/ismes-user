@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="1.3.3" name="WH_RYJBXX">
+	<fields>
+		<ryid type="pk" pk="true" comment="人员ID"/>
+		<zhmm type="string" maxlength="100" comment="账号密码"/>
+		<yggh type="string" maxlength="20" comment="员工工号"/>
+		<xm type="string" maxlength="50" comment="姓名"/>
+		<xb type="integer" comment="性别"/>
+		<csrq type="date" comment="出生日期"/>
+		<sfzh type="string" maxlength="20" comment="身份证号"/>
+		<lxdh type="string" maxlength="20" comment="联系电话"/>
+		<email type="string" maxlength="50" comment="Email"/>
+		<barcode type="string" maxlength="100" comment="条码" />
+		<gwid type="pk" comment="岗位id"/>
+		<zzjgid type="pk" comment="组织机构id"/>
+		<gzid type="pk" comment="工种id"/>
+		<bzid type="pk" comment="班组id"/>
+		<rgz type="decimal" length="6" precision="2" comment="日工资"/>
+		<bz type="string" maxlength="500" comment="备注"/>
+		<ryztdm type="dict" comment="人员状态代码"/>
+		<gs type="integer" comment="工时"/>
+	</fields>
+</model>

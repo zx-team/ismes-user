@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view name="listUserRole" title="人员角色分配">
+	<panel heading="人员列表" layoutconstraint="md:6;sm:6;">
+		<panel-body>
+			<table name="userInfo" showrownum="false" scroll="false" height="430" url="/manage/userTable" multiselect="false" onLoaded='prepareTable' onSelectRow="onSelectUser">
+				<column label="人员ID" name="ryid" hidden="true"></column>
+				<column label="工号" key="true" name="yggh"></column>
+				<column label="姓名" name="xm"></column>
+				<column label="组织机构" name="zzjgid"></column>
+				<column label="岗位" name="gwid"></column>
+				<column label="人员状态" name="ryztdm"  type="dict" dictionary="RYZT"></column>
+				<table-actions>
+					<button name="saveRoles" onClick="openRoleWindow" label="添加人员角色" type="reset" context="primary"></button>
+				</table-actions>
+			</table>
+		</panel-body>
+	</panel>
+	<panel heading="已选角色"  layoutconstraint="md:6;sm:6;">
+		<panel-body>
+			<table name="roleInfo"  url="/manage/selectedRolesTable" showrownum="false" scroll="false" multiselect="true" >
+				<column label="名称" key="true" name="name" hidden="true"></column>
+				<column label="角色" name="label"></column>
+				<column label="描述" name="desc"></column>
+				<column label="模块" name="module"></column>
+				<table-actions>
+					<button name="deleteRolesBtn" onClick="deleteRoles" label="删除选中角色" ></button>
+				</table-actions>
+			</table>
+		</panel-body>
+	</panel>
+	<modal name="modifyPasswordModal" heading="可选角色列表" sizing="large" show="false" keyboard="true" onShow="modalOnShow">
+		<modal-body>
+			<table name="availableRolesInfo"  url="/manage/availableRolesTable" showrownum="false" scroll="false" multiselect="true" layoutconstraint="md:12;sm:12;">
+				<column label="名称" key="true" name="name" hidden="true"></column>
+				<column label="角色" name="label"></column>
+				<column label="描述" name="desc"></column>
+				<column label="模块" name="module"></column>
+			</table>
+		</modal-body>
+		<modal-footer>
+			<button name="saveRoleBtn" label="保存" type="button"  onClick="saveRoles"></button>
+			<button name="closePasswordBtn" label="关闭" type="button"   onClick="closePassword"></button>
+		</modal-footer>
+	</modal>
+	<attribute name="javascript">
+	<![CDATA[
+		function modalOnShow() {
+			var rowid = ui.table("userInfo").getSelectedRows();
+			ui.table("availableRolesInfo").search({yggh:rowid[0]});
+		}
+		function deleteRoles() {
+		    var table = ui.table("roleInfo");
+		    var rowids = table.getSelectedRows();
+		 	if (rowids.length > 0) {
+				 ui.confirm("您确定要删除该条记录吗？", function(req){
+					if(req){
+						  	$.ajax({
+							  type: 'POST',
+							  url: 'deleteRoles',
+							  data: {yggh:currentUserId, roles:rowids},
+							   dataType:'json',  
+							   success:function(data) {  
+					             ui.table("roleInfo").search({yggh:currentUserId});
+							   },  
+							   error : function() {  
+							     ui.error("异常！");  
+							   }  
+							});
+						  
+				     }
+				     });
+	     	} else {
+		  		ui.alert('请选择角色');
+		  	}
+		}
+		function openRoleWindow() {
+			ui.modal("modifyPasswordModal").show();
+		}
+		function prepareTable() {
+		  var table = ui.table("userInfo");
+		  var  rows = table.getRowids();
+		  if (rows.length>0) {
+		  	table.selectRow(rows[0]);
+		  }
+		}
+		var currentUserId;
+		function onSelectUser(rowid, status) {
+			ui.table("roleInfo").search({yggh:rowid});
+			currentUserId = rowid;
+		}
+	    function saveRoles() {
+	    	var table = ui.table("availableRolesInfo");
+	    	var rowids = table.getSelectedRows();
+	    	if (rowids.length == 0) {
+	    		ui.alert('请选择角色');
+	    		return;
+	    	}
+  			$.ajax({
+			  type: 'POST',
+			  url: 'saveRoles',
+			  data: {yggh:currentUserId, roles:rowids},
+			   dataType:'json',  
+			   success:function(data) {  
+	             ui.success('保存成功');
+	             modalOnShow();
+	             ui.table("roleInfo").search({yggh:currentUserId});
+			   },  
+			   error : function() {  
+			     ui.error("异常！");  
+			   }  
+			});
+	    }
+		function closePassword() {
+	    	ui.modal("modifyPasswordModal").hide();
+	    }
+	]]>
+	</attribute>
+</view>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view name="listUser" title="人员基本信息" onReady="testViewReady">
+	<normal-actions>
+		<button name="addUser" label="添加" type="button" icon="icon-Add_to" onClick="addUser"></button>
+		<button name="modifyUser" label="修改" type="button" icon="icon-edit1" onClick="modifyUser"></button>
+		<button name="modifyPasswordBtn" label="修改密码" type="button" icon="icon-Modify_password" onClick="openModifyPasswordModal"></button>
+	</normal-actions>
+	<table name="userInfo" showrownum="false" scroll="false" minheight="430" url="/manage/userTable" multiselect="false">
+		<column label="人员ID" name="ryid" hidden="true"></column>
+		<column label="工号" name="yggh"></column>
+		<column label="姓名" name="xm"></column>
+		<column label="性别" name="xb" type="dict" dictionary="XB"></column>
+		<column label="出生日期" name="csrq"></column>
+		<column label="身份证号" name="sfzh"></column>
+		<column label="联系电话" name="lxdh"></column>
+		<column label="Email" name="email"></column>
+		<column label="组织机构" name="zzjgid"></column>
+		<column label="岗位" name="gwid"></column>
+		<column label="日工资" name="rgz"></column>
+		<column label="条码" name="barcode"></column>
+		<column label="备注" name="bz"></column>
+		<column label="人员状态" name="ryztdm" type="dict" dictionary="RYZT"></column>
+		<table-actions>
+			<button name="deleteUser" onClick="deleteUser" label="删除" type="reset" context="primary"></button>
+		</table-actions>
+	</table>
+	
+	<modal name="modifyPasswordModal" heading="修改密码" sizing="small" show="false" keyboard="true">
+		<modal-body>
+			<text name="old_password" label="旧密码" placeholder="请输入旧密码" validate="{required:true}"
+				readonly="false" layoutconstraint="md:12;sm:12" />
+			<text name="password" label="新密码" placeholder="请输入新密码" validate="{required:true}"
+				readonly="false" layoutconstraint="md:12;sm:12" />
+			<text name="confirm_password" label="确认新密码" placeholder="请输入新密码" validate="{required:true}"
+				readonly="false" layoutconstraint="md:12;sm:12" />
+		</modal-body>
+		<modal-footer>
+			<button label="修改" type="button" context="primary"
+							layoutconstraint="md:5;sm:2;md-offset:1"></button>
+			<button name="closePasswordBtn" label="关闭" type="button" context="primary"
+							layoutconstraint="md:5;sm:2;md-offset:1" onClick="closePassword"></button>
+		</modal-footer>
+	</modal>
+	<attribute name="javascript">
+	<![CDATA[
+	 	function openModifyPasswordModal() {
+	    	//ui.modal("modifyPasswordModal").show();
+            var rows = ui.table("userInfo").getSelectedRows();
+            if (rows == '') {
+            	ui.alert('请选择人员');
+            	return;
+            }
+           location.href='modifyPassword?ryid='+ui.table("userInfo").getCell(rows, "ryid");
+	    }
+		function closePassword() {
+	    	ui.modal("modifyPasswordModal").hide();
+	    }
+		function addUser(){
+			location.href='addUser'
+		}
+		function modifyUser(){
+            var rows = ui.table("userInfo").getSelectedRows();
+            if (rows == '') {
+            	ui.alert('请选择人员');
+            	return;
+            }
+           location.href='modifyUser?ryid='+ui.table("userInfo").getCell(rows, "ryid");
+		}
+		function deleteUser(){
+			var rows = ui.table("userInfo").getSelectedRows();
+            if (rows == '') {
+            	ui.alert('请选择人员');
+            	return;
+            }
+            ui.confirm("您确定要删除该条记录吗？", function(req){
+			if(req){
+		 		location.href='deleteUser?ryid='+ui.table("userInfo").getCell(rows, "ryid");
+		     }
+		     });
+		}
+		function testViewReady() {
+		}
+	]]>
+	</attribute>
+</view>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view name="user" title="This is a UI demo page !" onReady="testViewReady">
+	<panel border="false" layoutcontrains="md:6;sm:6;md-offset:3;sm-offset:3">
+		<panel heading="Form Demo : Please Input your personal information !"
+			context="primary">
+			<panel-body>
+				<form name="user-form">
+					<text name="name" label="名字" placeholder="请输入姓名" prepend="佟"
+						readonly="false" append="您好！" label-inline="true" validate="{required:true}"
+						onBlur="testOnBlur" onChange="testOnChange" sizing="large" bind="user.name">
+						<attribute name="value"><![CDATA[强]]></attribute>
+					</text>
+					<number name="height" label="身高" placeholder="请输入身高"
+						readonly="false" value="190" format="###,###.00" append="cm"
+						label-inline="true" validate="{required:true,digits:true,min:90}"
+						onBlur="testOnBlur" onChange="testOnChange" bind="user.height" />
+					<date name="birthday" label="生日" placeholder="请输入您的生日信息"
+						value="1992/02/01" bind="user.birthday" label-inline="true"
+						format="YYYY-MM-DD" validate="{required:true}" readonly="false"
+						onBlur="testOnBlur" onChange="testOnChange" />
+
+					<textarea name="desc" placeholder="请输入自我介绍" label="请输入自我介绍"
+						value="你是张三？" label-inline="false" validate="{required:true}"
+						onBlur="testOnBlur" onChange="testOnChange" bind="user.desc" />
+					<panel layoutcontrains="md:6;sm:6" border="false">
+						<panel name="favorite" heading="What your favorite fruit?">
+							<panel-body>
+								<checkbox name="favorite1" label="香蕉" value="banana"
+									bind='user.favorites' checked="true" onChange="testOnChange" />
+								<checkbox name="favorite2" label="苹果" value="apple"
+									bind='user.favorites' checked="true" />
+								<checkbox name="favorite3" label="大鸭梨" value="pear"
+									bind='user.favorites' validate="{required:true}" />
+								<checkbox name="favorite4" label="未知水果" value="XXX"
+									disabled="true" />
+							</panel-body>
+						</panel>
+					</panel>
+					<panel layoutcontrains="md:6;sm:6" border="false">
+						<panel name="favorite" heading="Sex?">
+							<panel-body>
+								<radio name="sex" label="男" value="male" checked="false"
+									onChange="testOnChange" bind="user.sex" />
+								<radio name="sex" label="女" value="female" checked="false"
+									bind="user.sex" />
+								<radio name="sex" label="其他" value="other" bind="user.sex" />
+								<radio name="sex" label="Dog？" value="dog" disabled="true" />
+							</panel-body>
+						</panel>
+					</panel>
+					<panel layoutcontrains="md:12;sm:12" border="false">
+						<panel heading="Select Demo">
+							<panel-body>
+								<select name="any" placeholder="请随便选" multiple="true"
+									label="可以多选的哦" layoutcontrains="md:6;sm:6" validate="{required:true}" bind="user.any"
+									onChange="testOnChange">
+									<optgroup label="Profile">
+										<option value="0" label="My Profile" />
+										<option value="1" label="My Friends" />
+									</optgroup>
+									<optgroup label="System">
+										<option value="2" selected="true" label="Messages" />
+										<option value="3" label="My Settings" />
+										<option value="4" label="Logout" />
+									</optgroup>
+								</select>
+								<select name="city" placeholder="请选择所在城市" label="请选择所在城市"
+									layoutcontrains="md:6;sm:6" validate="{required:true}"
+									onChange="testOnChange" value="2" bind="user.city">
+									<optgroup label="辽宁省">
+										<option value="0" label="沈阳" />
+										<option value="1" label="大连" />
+									</optgroup>
+									<option value="2" label="厦门" />
+									<option value="3" label="澳门" />
+									<option value="4" label="南海" />
+								</select>
+							</panel-body>
+						</panel>
+					</panel>
+					<panel border="false">
+						<button name="aaa3" label="提交" type="submit" context="primary"
+							layoutcontrains="md:2;sm:2;md-offset:4" tooltip="点击提交表单"></button>
+						<button name="aaa3" label="重置" type="reset" context="default"
+							layoutcontrains="md:2;sm:2;md-offset:1"></button>
+					</panel>
+				</form>
+			</panel-body>
+		</panel>
+
+	</panel>
+	<panel layoutcontrains="md:6;sm:6;md-offset:3;sm-offset:3"
+		border="false">
+		<panel heading="Buttons Demo">
+			<panel-body>
+				<button name="aaa1" label="链接按钮" href="javascript:void(0);"
+					context="link" layoutcontrains="md:2;sm:2;" sizing="extrasmall"></button>
+				<button name="aaa2" label="按钮" context="default"
+					layoutcontrains="md:2;sm:2;md-offset:1" onClick="testBtnClick" tooltip="已绑定点击事件"></button>
+				<button name="aaa3" label="首要" type="submit" context="primary"
+					layoutcontrains="md:2;sm:2;md-offset:1" sizing="large"></button>
+				<button name="aaa4" label="危险" type="reset" context="danger"
+					layoutcontrains="md:2;sm:2;md-offset:1" sizing="huge" onClick="testBtnClick"></button>
+			</panel-body>
+		</panel>
+	</panel>
+	<panel layoutcontrains="md:6;sm:6;md-offset:3;sm-offset:3"
+		border='false'>
+		<panel heading="Dropdown Demo">
+			<panel-body>
+				<dropdown name="dropdown1" label="正常极小" dropdown="false"
+					layoutcontrains="md-offset:0" split="true" sizing="extrasmall"
+					context="default">
+					<menuitem label="菜单1" />
+					<menuitem label="菜单2" />
+					<separator />
+					<menuitem label="菜单3" />
+				</dropdown>
+				<dropdown name="dropdown4" label="危险小" dropdown="false"
+					layoutcontrains="md-offset:1" split="true" sizing="small" context="danger">
+					<menuitem label="菜单1" />
+					<menuitem label="菜单2" />
+					<separator />
+					<menuitem label="菜单3" />
+				</dropdown>
+				<dropdown name="dropdown2" label="警告一般" dropdown="true"
+					layoutcontrains="md-offset:1" split="false" sizing="default"
+					context="warning">
+					<menuitem label="菜单1" />
+					<menuitem label="菜单2" />
+					<separator />
+					<menuitem label="菜单3" />
+				</dropdown>
+				<dropdown name="dropdown3" label="首要大" dropdown="false"
+					layoutcontrains="md-offset:1" split="true" sizing="large" context="primary">
+					<menuitem label="菜单1" />
+					<menuitem label="菜单2" />
+					<separator />
+					<menuitem label="菜单3" />
+				</dropdown>
+			</panel-body>
+		</panel>
+	</panel>
+	<panel layoutcontrains="md:8;sm:8;md-offset:2;sm-offset:2"
+		border='false'>
+		<panel heading="Dropdown Demo">
+	<table name="tabledemo1"  url="table/json" mtype="GET" search="true">
+				<column label="序号" name="id"></column>
+		<column label="名称" name="name"></column>
+		<column label="日期" name="date"></column>
+		<column label="性别" name="sex"></column>
+		<column label="地址" name="addres"></column>
+				<toolbar edit="true" search="true">
+					<button onClick="asda" label="demo" icon="ui-asdad"></button>
+				</toolbar>
+
+			</table>
+	</panel>
+	</panel>
+	<attribute name="javascript">
+	<![CDATA[
+		function testOnBlur() {
+			alert(this.attr("label")+":"+this.val()+" is blured!");
+		}
+		function testOnChange() {
+			alert(this.attr("label")+":"+this.val()+"'s value changed!");
+		}
+		function testViewReady() {
+			//alert("The view is ready now!\r\nYou can do anything what you like!^.^");
+			var nameField = ui.text("name");
+			var birthday = ui.date("birthday");
+			var apple = ui.checkbox("favorite2");
+			var sexFemale = ui.radio("sex_female");
+			sexFemale.attr("disabled",true);
+			if(!nameField.val())
+			nameField.val("On view is ready, set this value by function testViewReady! <.>");
+			//if(!birthday.val())
+			//birthday.val("1981-03-23");
+			//apple.attr("checked",false);
+		}
+		function testBtnClick() {
+			alert("button "+this.attr("name")+"'s label is "+this.attr("label"));
+			this.attr("label",this.attr("label")+" - clicked");
+			alert("button "+this.attr("name")+"'s label is "+this.attr("label"));			
+			alert("button "+this.attr("name")+" will be disabled! ");
+			this.attr("disabled",true);
+			
+		}
+		function asda() {
+			alert("button ");
+		};
+		function shenpi(){
+			return "<a href='#'>审批</a>";
+		}
+	]]>
+	</attribute>
+</view>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="user" version="1.0.0" category="system">
+	<information>
+		<name>System User Management</name>
+		<vendor>
+			<name>Isesol isMES</name>
+			<url>http://www.isesol.com/</url>
+		</vendor>
+		<description>User is a module which adds user functionality to system.</description>
+		<license>AGPL</license>
+	</information>
+	<activities>
+		<activity name="manage" dialect="java" roles="SYSTEM_MANAGEMENT_ROLE" class="com.isesol.mes.ismes.user.activity.ManageUserActivity"/>
+		<activity name="securityActivity" dialect="java" class="com.isesol.mes.ismes.user.activity.SecurityActivity"/>
+		<activity name="service" dialect="java" class="com.isesol.mes.ismes.user.service.UserService"/>
+	</activities>
+	<roles>
+		<role name="SYSTEM_MANAGEMENT_ROLE" label="系统管理人员_用户管理" description="系统基础信息设置" />
+	</roles>
+	<menus>
+		<!-- 系统管理（一级） -->
+		<category name="sysmanage" label="系统管理" icon="#fb5070;system_maintenance" weight="60"/>
+		<category name="user_manager" label="员工管理" icon="button " category = "sysmanage" weight="10"/>
+		<menu name="usermanage" label="员工信息" activity="manage" activity-method="listUser" 
+			category="user_manager" roles="SYSTEM_MANAGEMENT_ROLE" description="员工信息" icon="button" weight="100"/>
+		<menu name="rolemanage" label="角色分配" activity="manage" activity-method="listUserRole" 
+			category="user_manager" roles="SYSTEM_MANAGEMENT_ROLE" description="员工角色" icon="button" weight="200"/>
+	</menus>
+	<services>
+		<service name = "userInfo" activity = "securityActivity" activity-method = "getUserInfo"></service>
+		<service name = "userInfoByID" activity = "securityActivity" activity-method = "getUserInfoByID"></service>
+		<service name = "userRoleService" activity = "securityActivity" activity-method = "getRolesByUserId"></service>
+		<service name = "userDepartmentService" activity = "service" activity-method = "getUserDepartments"/>
+		<service name = "userInfoByYggh" activity = "service" activity-method = "getUserInfoByYggh"/>
+	</services>
+</module>

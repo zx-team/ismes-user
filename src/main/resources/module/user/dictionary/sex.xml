@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<category name="XB" label="性别" description="性别代码">
+	<field value="10" label="男"/>
+	<field value="20" label="女"/>
+</category>

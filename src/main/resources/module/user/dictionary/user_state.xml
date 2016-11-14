@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<category name="RYZT" label="人员状态代码" description="人员状态代码">
+	<field value="10" label="正常"/>
+	<field value="20" label="请假"/>
+	<field value="30" label="离职"/>
+</category>

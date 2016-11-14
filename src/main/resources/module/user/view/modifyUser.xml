@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view name="modifyUser" title="修改人员">
+			<form name="user-form" action="modifyUser" method="post" horizontal="true">
+				<form-body>
+					<hidden name="submitFlag" value="1"></hidden>
+					<hidden name="ryid" bind="user.ryid"></hidden>
+				    <hidden name="old_gh" bind="user.old_gh"></hidden>
+					<form-group>
+					 	<label for="yggh" text="工号" layoutconstraint="md:1"/>
+						<text name="yggh" placeholder="请输入工号" validate="{required:true, maxlength:20}" bind="user.yggh" layoutconstraint="md:4;"/>
+						<label for="xm" text="姓名" layoutconstraint="md:1"/>
+						<text name="xm" placeholder="请输入姓名" validate="{required:true, maxlength:50}" bind="user.xm" layoutconstraint="md:4;"/>
+					</form-group>
+					<form-group>
+						<label for="sex2" text="性别" layoutconstraint="md:1"/>
+						<input-group layoutconstraint="md:4">
+							<radio name="xb" label="男" value="10" checked="false" bind="user.xb" inline="true"/>
+							<radio name="xb" label="女" value="20" checked="false" bind="user.xb" inline="true"/>
+						</input-group>
+						<label for="csrq" text="出生日期" layoutconstraint="md:1"/>
+						<date name="csrq" placeholder="请输入您的生日信息" format="YYYY-MM-DD" bind="user.csrq" layoutconstraint="md:4;"/>
+					</form-group>
+					<form-group>
+						<label for="sfzh" text="身份证号" layoutconstraint="md:1"/>
+						<text name="sfzh" placeholder="请输入身份证号" validate="{idcard:true}" bind="user.sfzh" layoutconstraint="md:4;" />
+						<label for="lxdh" text="联系电话" layoutconstraint="md:1"/>
+						<text name="lxdh" placeholder="请输入联系电话" bind="user.lxdh" layoutconstraint="md:4;"/>
+					</form-group>
+					<form-group>
+						<label for="ryztdm" text="人员状态" layoutconstraint="md:1"/>
+						<select name="ryztdm" validate="{required:true}" dictionary="RYZT" bind="user.ryztdm" layoutconstraint="md:4;"></select>
+						<label for="email" text="Email" layoutconstraint="md:1"/>
+						<text name="email" placeholder="请输入电子邮箱" validate="{email:true}" bind="user.email" layoutconstraint="md:4;"/>
+					</form-group>
+					<form-group>
+						<label for="zzjgid" text="组织机构" layoutconstraint="md:1;sm:1"/>
+						<select name="zzjgid" validate="{required:true}" placeholder="请选择组织机构" bind="user.zzjgid" layoutconstraint="md:4;" url="/manage/listCj" ></select>
+					 	<label for="gwid" text="岗位" layoutconstraint="md:1"/>
+						<select name="gwid" parent="zzjgid" bind="user.gwid" layoutconstraint="md:4;" url="/manage/listGw"></select>
+					</form-group>
+					<form-group>
+					 	<label for="rgz" text="日工资(元)" layoutconstraint="md:1"/>
+						<text name="rgz" placeholder="请输日工资" validate="{number:true}" bind="user.rgz" layoutconstraint="md:4;" />
+						<label for="bz" text="备注" layoutconstraint="md:1"/>
+						<textarea name="bz" validate="maxlength:200" bind="user.bz" layoutconstraint="md:4;"/>
+					</form-group>
+					<form-group>
+					 	<label for="barcode" text="条码" layoutconstraint="md:1"/>
+						<text name="barcode" placeholder="条码" validate="{number:true}" bind="user.barcode" layoutconstraint="md:4;" />
+						<!-- <label for="bz" text="备注" layoutconstraint="md:1"/>
+						<textarea name="bz" validate="maxlength:200" bind="user.bz" layoutconstraint="md:4;"/> -->
+					</form-group>
+				</form-body>
+				<form-actions>
+					<button name="cancelModifyUser" onClick="listUser" label="取消" type="button" context="primary"></button>
+					<button label="保存" type="submit" context="primary"></button>
+				</form-actions>
+			</form>
+	<attribute name="javascript">
+	<![CDATA[
+		function listUser(){
+			location.href='listUser'
+		}
+	]]>
+	</attribute>
+</view>

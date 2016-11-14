@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="1.3" name="WH_YHJS">
+	<fields>
+		<yhjsid type="pk" pk="true" comment="用户角色ID"/>
+		<yggh type="user" comment="员工工号" />
+		<jsmc type="string" maxlength="50" comment="角色名称"/>
+		<ssmkmc type="string" maxlength="50" comment="所属模块名称"/>
+	</fields>
+</model>

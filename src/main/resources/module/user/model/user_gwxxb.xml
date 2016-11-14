@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 岗位信息表 -->
+<model version="1.0.0" name="user_gwxxb">
+	<fields>
+		<gwid type = "pk" pk = "true" comment="岗位id"/>
+		<gwbm type="string" maxlength="20" comment="岗位编码"/>
+		<gwmc type="string" maxlength="50" comment="岗位名称"/>
+		<zzjgid type="pk" comment="组织结构ID"/>
+		<fjdid type="pk" comment="父节点id"/>
+	</fields>
+</model>
